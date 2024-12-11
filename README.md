@@ -1,27 +1,32 @@
 # RealTimeTicketingSystemCLI
 # Ticket Booking System
 
-A Java-based concurrent ticket booking system that simulates ticket sales between vendors and customers. This system allows for configuration of ticket capacity and transaction rates, with support for multiple concurrent customers.
+A Java-based concurrent ticket booking system that simulates ticket distribution between vendors and customers. The system features configurable capacity management, multi-threaded operations, and persistent configuration storage.
 
-## System Overview
+## Features
 
-The system consists of the following main components:
-- Ticket Pool: Manages the available tickets and their distribution
-- Vendor: Releases tickets into the pool at configured intervals
-- Customers: Attempt to purchase tickets from the pool
-- Configuration System: Handles system parameters and persistence
+- Concurrent ticket sales processing
+- Configurable ticket capacity and release rates
+- Multiple simultaneous customer support
+- Persistent configuration storage
+- Thread-safe operations
+- Comprehensive logging system
 
 ## Prerequisites
 
 - Java JDK 8 or higher
-- Maven (for dependency management)
-- Google Gson library for JSON handling
+- Maven
+- Gson library for JSON processing
 
-## Getting Started
+## Installation
 
-1. Clone the repository to your local machine
-2. Ensure you have the required dependencies in your `pom.xml`:
+1. Clone the repository:
+```bash
+git clone https://github.com/aranisweerathunga/ticket-booking-system.git
+cd ticket-booking-system
+```
 
+2. Add the following dependency to your `pom.xml`:
 ```xml
 <dependencies>
     <dependency>
@@ -32,117 +37,121 @@ The system consists of the following main components:
 </dependencies>
 ```
 
-## Configuration
+3. Build the project:
+```bash
+mvn clean install
+```
 
-The system can be configured either through the interactive console or by loading a previous configuration from `config.json`. The configuration parameters include:
+## Usage
 
-- Maximum Ticket Capacity: Maximum number of tickets available at any time
-- Total Ticket Capacity: Total number of tickets that can be released
-- Ticket Release Rate: Time interval (in milliseconds) between ticket releases
-- Ticket Retrieval Rate: Time interval (in milliseconds) between customer purchase attempts
+1. Run the main class:
+```bash
+java -cp target/ticket-booking-system-1.0.jar org.example.Main
+```
 
-## Running the System
+2. Use the interactive menu to:
+   - Configure the system
+   - Start ticket booking operations
+   - Stop the system
 
-1. Compile and run the `Main` class
-2. You will be presented with the following menu:
-   ```
-   --- Ticket Booking System Menu ---
-   1. Configure System
-   2. Start System
-   3. Stop System
-   ```
+### Configuration Options
 
-### Option 1: Configure System
-- If a configuration file exists, you'll be asked if you want to load it
-- If you choose not to load existing configuration or if no configuration exists, you'll be prompted to enter new parameters
-- The system will automatically start after configuration
+The system prompts for the following parameters:
+- Maximum ticket capacity
+- Total ticket capacity
+- Ticket release rate (milliseconds)
+- Ticket retrieval rate (milliseconds)
 
-### Option 2: Start System
-- Loads existing configuration if available
-- If no configuration exists, prompts for new configuration
-- Starts the ticket booking simulation with configured parameters
+### Menu Options
 
-### Option 3: Stop System
-- Terminates the program
+```
+--- Ticket Booking System Menu ---
+1. Configure System
+2. Start System
+3. Stop System
+```
+
+- Option 1: Set up system parameters
+- Option 2: Begin ticket booking simulation
+- Option 3: Terminate the program
 
 ## System Components
 
 ### Ticketpool
-- Manages the ticket inventory
-- Handles synchronization between vendor and customers
-- Tracks total tickets released and available tickets
-- Implements thread-safe operations for ticket release and retrieval
+Manages the central ticket repository with thread-safe operations:
+- Ticket release management
+- Available ticket tracking
+- Synchronized ticket distribution
 
 ### Vendor
-- Runs on a separate thread
-- Releases tickets at specified intervals
-- Monitors maximum capacity limits
-- Logs ticket release operations
+Handles ticket release operations:
+- Controlled ticket release intervals
+- Capacity monitoring
+- Operation logging
 
 ### Customer
-- Multiple customers can run concurrently
-- Attempts to purchase tickets at specified intervals
-- Continues until no more tickets are available or selling stops
-- Logs purchase operations
+Simulates ticket purchasing behavior:
+- Concurrent purchase attempts
+- Configurable purchase rates
+- Purchase verification
 
 ### Configure
-- Handles reading and writing configuration to JSON file
-- Validates user inputs
-- Maintains configuration persistence between runs
+Manages system configuration:
+- JSON-based configuration storage
+- Parameter validation
+- Configuration persistence
+
+## Configuration File
+
+The system uses `config.json` for storing configuration:
+
+```json
+{
+    "maxTicketCapacity": 100,
+    "totalTicketCapacity": 1000,
+    "ticketReleaseRate": 1000,
+    "ticketRetrievalRate": 500
+}
+```
 
 ## Logging
 
-The system uses Java's built-in logging system to track operations:
-- Ticket releases and purchases
+The system implements Java's logging framework to track:
+- Ticket operations
+- Thread activities
 - Configuration changes
-- Thread status updates
-- Error conditions
-
-Logs are output to the console by default.
+- Error events
 
 ## Error Handling
 
-The system includes robust error handling for:
-- Invalid user inputs
-- Configuration file errors
+The system includes comprehensive error handling for:
+- Invalid configurations
 - Thread interruptions
-- Synchronization issues
-
-## Best Practices
-
-1. Always configure the system before starting ticket sales
-2. Use reasonable values for release and retrieval rates to avoid system overload
-3. Monitor the logs to track system behavior
-4. Ensure proper shutdown using the menu option rather than force-closing
-
-## Troubleshooting
-
-Common issues and solutions:
-
-1. **Configuration Loading Fails**
-   - Verify config.json exists and has proper format
-   - Check file permissions
-   - Try creating a new configuration
-
-2. **System Appears Stuck**
-   - Check if release/retrieval rates are set too high
-   - Verify thread status in logs
-   - Ensure capacity values are appropriate
-
-3. **Unexpected Termination**
-   - Check logs for interruption messages
-   - Verify sufficient system resources
-   - Ensure proper exception handling
+- File operations
+- User input validation
 
 ## Contributing
 
-To extend or modify the system:
-1. Follow the existing thread-safe patterns
-2. Maintain proper synchronization
-3. Add appropriate logging
-4. Update configuration handling for new parameters
-5. Document changes in this README
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-This project is available for open use and modification. Please maintain appropriate attribution to original authors.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+- Java Concurrent Utilities
+- Google Gson Library
+- Java Logging Framework
+
+## Author
+
+Arani Weerathunga
+
+## Support
+
+For support, please open an issue in the GitHub repository.
